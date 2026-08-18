@@ -1,33 +1,141 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GenLayer Spinner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GenLayer Spinner</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #090b14;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+  width: 95%;
+  max-width: 420px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.wheel-box {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: auto;
+}
+
+#wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 8px solid white;
+  background: conic-gradient(
+    #ff5c5c 0deg 60deg,
+    #ffb84d 60deg 120deg,
+    #ffe066 120deg 180deg,
+    #66d17a 180deg 240deg,
+    #4db8ff 240deg 300deg,
+    #a66cff 300deg 360deg
+  );
+  transition: transform 4s cubic-bezier(.17,.67,.12,.99);
+}
+
+.pointer {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 35px solid white;
+  z-index: 5;
+}
+
+button {
+  margin-top: 35px;
+  padding: 15px 45px;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 25px;
+  min-height: 30px;
+}
+</style>
 </head>
+
 <body>
-  <h1>🎡 GenLayer Spinner</h1>
 
-  <div id="wheel">SPIN</div>
+<div class="container">
 
-  <button onclick="spin()">SPIN NOW</button>
+<h1>🎡 GenLayer Spinner</h1>
 
-  <h2 id="result"></h2>
+<div class="wheel-box">
+  <div class="pointer"></div>
+  <div id="wheel"></div>
+</div>
 
-  <script>
-    const options = [
-      "GenLayer",
-      "Intelligent Contracts",
-      "AI",
-      "Web3",
-      "Community",
-      "Builder"
-    ];
+<button onclick="spin()">SPIN NOW</button>
 
-    function spin() {
-      const result = options[Math.floor(Math.random() * options.length)];
-      document.getElementById("result").innerText =
-        "Result: " + result;
-    }
-  </script>
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+const options = [
+  "GenLayer",
+  "AI",
+  "Web3",
+  "Intelligent Contracts",
+  "Community",
+  "Builder"
+];
+
+let rotation = 0;
+
+function spin() {
+
+  const wheel = document.getElementById("wheel");
+
+  const random = Math.floor(Math.random() * options.length);
+
+  rotation += 1440 + random * 60;
+
+  wheel.style.transform = `rotate(${rotation}deg)`;
+
+  setTimeout(() => {
+
+    document.getElementById("result").innerText =
+      "🎉 Result: " + options[random];
+
+  }, 4000);
+}
+
+</script>
+
 </body>
 </html>
