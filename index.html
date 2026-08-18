@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenLayer Spinner</title>
+</head>
+<body>
+  <h1>🎡 GenLayer Spinner</h1>
+
+  <div id="wheel">SPIN</div>
+
+  <button onclick="spin()">SPIN NOW</button>
+
+  <h2 id="result"></h2>
+
+  <script>
+    const options = [
+      "GenLayer",
+      "Intelligent Contracts",
+      "AI",
+      "Web3",
+      "Community",
+      "Builder"
+    ];
+
+    function spin() {
+      const result = options[Math.floor(Math.random() * options.length)];
+      document.getElementById("result").innerText =
+        "Result: " + result;
+    }
+  </script>
+</body>
+</html>
